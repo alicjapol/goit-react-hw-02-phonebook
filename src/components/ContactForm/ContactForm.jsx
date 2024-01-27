@@ -52,7 +52,6 @@ export default class ContactForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <h2>Phonebook</h2>
           <label>
             Name
             <input
