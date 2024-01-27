@@ -72,7 +72,7 @@ export default class ContactForm extends Component {
               required
             />
           </label>
-         
+      
           <button type="submit">Add contact</button>
         </form>
       </div>
