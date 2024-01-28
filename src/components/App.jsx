@@ -1,9 +1,21 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
+import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
 import Filter from './Filter/Filter';
 
 export class App extends Component {
+  static propTypes = {
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        number: PropTypes.string,
+      })
+    ),
+    filter: PropTypes.string,
+  };
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -23,10 +35,10 @@ export class App extends Component {
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
   };
-  removeContact(id) { 
-    const newList = this.contacts.filter((contact) => contact.id !== id);
-  return this.setState({ contacts: newList })
-  }
+  removeContact = id => {
+    const newList = this.state.contacts.filter(contact => contact.id !== id);
+    this.setState({ contacts: newList });
+  };
   render() {
     return (
       <div>
@@ -35,8 +47,10 @@ export class App extends Component {
 
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleChange} />
-        <ContactList contacts={this.filteredContacts()} 
-        onRemove={this.removeContact}/>
+        <ContactList
+          contacts={this.filteredContacts()}
+          onRemove={this.removeContact}
+        />
       </div>
     );
   }

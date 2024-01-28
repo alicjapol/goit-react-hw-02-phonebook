@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 
 export default class ContactForm extends Component {
+  static propTypes = {
+    name: PropTypes.string,
+    number: PropTypes.string,
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        number: PropTypes.string,
+      })
+    ),
+    filter: PropTypes.string,
+    loginInputId: PropTypes.string,
+    handleChange: PropTypes.func,
+    handleSubmit: PropTypes.func,
+  };
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -16,23 +32,21 @@ export default class ContactForm extends Component {
 
   loginInputId = nanoid();
 
-  handleChange = (evt) => {
+  handleChange = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
-  
+
     const isDuplicate = this.state.contacts.some(
-      (contact) =>
+      contact =>
         contact.name.toLowerCase() === this.state.name.toLowerCase() ||
         contact.number === this.state.number
     );
-  
-    if (isDuplicate === true) {
 
+    if (isDuplicate === true) {
       alert('Contact with the same name or number already exists!');
       return;
     }
   };
-  
 
   handleSubmit = evt => {
     evt.preventDefault();
@@ -72,7 +86,7 @@ export default class ContactForm extends Component {
               required
             />
           </label>
-      
+
           <button type="submit">Add contact</button>
         </form>
       </div>
