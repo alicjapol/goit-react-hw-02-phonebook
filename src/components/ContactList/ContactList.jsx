@@ -12,7 +12,7 @@ export default class ContactList extends Component {
         <ul>
           {this.props.contacts.map(contact => (
             <li key={contact.id}>{`${contact.name}: ${contact.number}`}
-            <button onClick={() => this.onRemove(contact.id)}>Delete</button>
+            <button onClick={() => this.removeContact(contact.id)}>Delete</button>
             </li>
           ))
           }
