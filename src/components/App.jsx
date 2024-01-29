@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import ContactForm from './ContactForm/ContactForm';
 import ContactList from './ContactList/ContactList';
@@ -39,6 +38,7 @@ export class App extends Component {
     const newList = this.state.contacts.filter(contact => contact.id !== id);
     this.setState({ contacts: newList });
   };
+ 
   render() {
     return (
       <div>

@@ -13,10 +13,7 @@ export default class ContactList extends Component {
     ),
   };
 
-  removeContact = id => {
-    this.props.onRemove(id);
-  };
-
+ 
   render() {
     const { contacts } = this.props;
 
