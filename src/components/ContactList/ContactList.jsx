@@ -13,9 +13,8 @@ export default class ContactList extends Component {
     ),
   };
 
- 
   render() {
-    const { contacts } = this.props;
+    const { contacts, onRemove } = this.props;
 
     return (
       <div>
@@ -23,9 +22,7 @@ export default class ContactList extends Component {
           {contacts.map(contact => (
             <li key={contact.id}>
               {`${contact.name}: ${contact.number}`}
-              <button onClick={() => this.removeContact(contact.id)}>
-                Delete
-              </button>
+              <button onClick={() => onRemove(contact.id)}>Delete</button>
             </li>
           ))}
         </ul>

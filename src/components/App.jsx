@@ -1,3 +1,4 @@
+// App.jsx
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ContactForm from './ContactForm/ContactForm';
@@ -13,8 +14,8 @@ export class App extends Component {
         number: PropTypes.string,
       })
     ),
-    filter: PropTypes.string,
   };
+
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -24,6 +25,7 @@ export class App extends Component {
     ],
     filter: '',
   };
+
   handleChange = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
@@ -34,16 +36,26 @@ export class App extends Component {
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
   };
+
   removeContact = id => {
     const newList = this.state.contacts.filter(contact => contact.id !== id);
     this.setState({ contacts: newList });
   };
- 
+
+  addContact = newContact => {
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
   render() {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm
+          onAddContact={this.addContact}
+          contacts={this.state.contacts}
+        />
 
         <h2>Contacts</h2>
         <Filter value={this.state.filter} onChange={this.handleChange} />
