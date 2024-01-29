@@ -26,6 +26,16 @@ export default class ContactForm extends Component {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
 
+
+  };
+
+  handleSubmit = evt => {
+    evt.preventDefault();
+    const newContact = {
+      id: nanoid(),
+      name: this.state.name,
+      number: this.state.number,
+    };
     const isDuplicate = this.props.contacts.some(
       contact =>
         contact.name.toLowerCase() === this.state.name.toLowerCase() ||
@@ -36,16 +46,6 @@ export default class ContactForm extends Component {
       alert('Contact with the same name or number already exists!');
       return;
     }
-  };
-
-  handleSubmit = evt => {
-    evt.preventDefault();
-    const newContact = {
-      id: nanoid(),
-      name: this.state.name,
-      number: this.state.number,
-    };
-
     this.setState({ name: '', number: '' });
 
     if (this.props.onAddContact) {
